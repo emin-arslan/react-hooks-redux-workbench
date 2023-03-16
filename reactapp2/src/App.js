@@ -22,7 +22,7 @@ export default class App extends Component {
           <Row>
             <Col xs="3">
               <CategoryList
-                currentCategory={this.currentCategory}
+                currentCategory={this.state.currentCategory}
                 changeCategory={this.changeCategory}
                 info={CetegoryInfo}
               />
