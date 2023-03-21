@@ -5,7 +5,7 @@ import ProductList from "./ProductList";
 import { Container, Row, Col } from "reactstrap";
 
 export default class App extends Component {
-  state = { currentCategory: "", products: [] , cart:[]};
+  state = { currentCategory: "", products: [], cart: [] };
   changeCategory = (category) => {
     this.setState({ currentCategory: category.categoryName });
     this.getProducts(category.id);
@@ -25,16 +25,33 @@ export default class App extends Component {
       .then((response) => response.json())
       .then((data) => this.setState({ products: data }));
   };
+  removeFromCart = (cartItem) => {
+    let newCart;
+    console.log(cartItem.quantity);
+    if (cartItem.quantity > 1) {
+      newCart = this.state.cart.map((obj) =>
+        obj.product.id === cartItem.product.id
+          ? { ...obj, quantity: obj.quantity - 1 }
+          : obj
+      );
+    } else {
+      newCart = this.state.cart.filter(
+        (c) => c.product.id !== cartItem.product.id
+      );
+    }
+
+    this.setState({ cart: newCart });
+  };
   addToCart = (product) => {
     let newCart = this.state.cart;
-    var addedItem = newCart.find(c=>c.product.id === product.id)
-    if(addedItem){
-      addedItem.quantity +=1;
+    var addedItem = newCart.find((c) => c.product.id === product.id);
+    if (addedItem) {
+      addedItem.quantity += 1;
+    } else {
+      newCart.push({ product: product, quantity: 1 });
+      this.setState({ cart: newCart });
     }
-    else{
-      newCart.push({product:product,quantity:1});
-    }
-    this.setState({cart:newCart});
+    this.setState({ cart: newCart });
   };
   render() {
     let productInfo = { title: "ProductList" };
@@ -42,7 +59,7 @@ export default class App extends Component {
     return (
       <div>
         <Container>
-          <Navi cart={this.state.cart} />
+          <Navi cart={this.state.cart} removeFromCart={this.removeFromCart} />
           <Row>
             <Col xs="3">
               <CategoryList
@@ -52,7 +69,11 @@ export default class App extends Component {
               />
             </Col>
             <Col xs="9">
-              <ProductList addToCart = {this.addToCart} info={productInfo} products={this.state.products} />
+              <ProductList
+                addToCart={this.addToCart}
+                info={productInfo}
+                products={this.state.products}
+              />
             </Col>
           </Row>
         </Container>

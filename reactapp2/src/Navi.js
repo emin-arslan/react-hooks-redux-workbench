@@ -5,7 +5,7 @@ export default class Navi extends Component {
   render() {
     return (
       <div>
-         <CartSummary cart={this.props.cart}/>
+         <CartSummary removeFromCart={this.props.removeFromCart} cart={this.props.cart}/>
       </div>
     )
   }
