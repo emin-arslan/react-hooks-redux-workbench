@@ -11,20 +11,23 @@ export default class CartSummary extends Component {
     return <div>Empty Cart</div>;
   }
   renderSummary() {
-    let a="x";
     return (
-      
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
           Your Cart
         </DropdownToggle>
-        <DropdownMenu >
+        <DropdownMenu>
           {this.props.cart.map((cartItem) => (
             <DropdownItem key={cartItem.product.id}>
-               
               {cartItem.product.quantity}
-              <Badge onClick={()=>this.props.removeFromCart(cartItem)} color="danger">
-              {cartItem.quantity>1?a="-":a="x"}
+              <Badge
+                onClick={(e) => {
+                  e.stopPropagation();
+                  this.props.removeFromCart(cartItem);
+                }}
+                color="danger"
+              >
+                {cartItem.quantity > 1 ? "-" : "x"}
               </Badge>
               {cartItem.product.body}{" "}
               <Badge color="success"> {cartItem.quantity}</Badge>{" "}

@@ -4,7 +4,7 @@ import Navi from "./Navi";
 import ProductList from "./ProductList";
 import { Container, Row, Col } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./NotFound";
 import CartList from "./CartList";
@@ -84,27 +84,17 @@ export default class App extends Component {
                 info={CetegoryInfo}
               />
             </Col>
-           
+
             <Col xs="9">
-              <Routes>
-                <Route
-                  exact
-                  path="/"
-                  element={
-                    <ProductList
-                      addToCart={this.addToCart}
-                      info={productInfo}
-                      products={this.state.products}
-                    />
-                  }
-                />        <ToastContainer/>
-                <Route exact path="/cart" Component={CartList} />
-                <Route Component={NotFound} />
-              </Routes>
+              <ProductList
+                addToCart={this.addToCart}
+                info={productInfo}
+                products={this.state.products}
+              />
             </Col>
           </Row>
+          <ToastContainer/>
         </Container>
-
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Table, Button } from "reactstrap";
+import { ToastContainer, toast } from "react-toastify";
 export default class ProductList extends Component {
 
   render() {
@@ -22,7 +23,7 @@ export default class ProductList extends Component {
                 <td>
                   {" "}
                   <Button onClick={() => this.props.addToCart(product)} color="info">
-                    
+              
                     add to card
                   </Button>{" "}
                 </td>
@@ -30,6 +31,7 @@ export default class ProductList extends Component {
             ))}
           </tbody>
         </Table>
+
       </div>
     );
   }
