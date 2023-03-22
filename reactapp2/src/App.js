@@ -3,6 +3,10 @@ import React, { Component } from "react";
 import Navi from "./Navi";
 import ProductList from "./ProductList";
 import { Container, Row, Col } from "reactstrap";
+import { ToastContainer, toast } from "react-toastify";
+import { Route, Routes } from "react-router-dom";
+import NotFound from "./NotFound";
+import CartList from "./CartList";
 
 export default class App extends Component {
   state = { currentCategory: "", products: [], cart: [] };
@@ -53,6 +57,7 @@ export default class App extends Component {
     }
     this.setState({ cart: newCart });
   };
+
   render() {
     let productInfo = { title: "ProductList" };
     let CetegoryInfo = { title: "CategoryList" };
@@ -69,11 +74,22 @@ export default class App extends Component {
               />
             </Col>
             <Col xs="9">
-              <ProductList
-                addToCart={this.addToCart}
-                info={productInfo}
-                products={this.state.products}
-              />
+              <Routes>
+                <Route
+                  exact
+                  path="/app"
+                  render={props => (
+                    <ProductList
+                      {...props}
+                      addToCart={this.addToCart}
+                      info={productInfo}
+                      products={this.state.products}
+                    />
+                  )}
+                />
+                <Route exact path="/cart" Component={CartList} />
+                <Route Component={NotFound} />
+              </Routes>
             </Col>
           </Row>
         </Container>

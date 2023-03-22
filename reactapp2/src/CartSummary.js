@@ -13,7 +13,7 @@ export default class CartSummary extends Component {
   renderSummary() {
     let a="x";
     return (
-    
+      
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
           Your Cart
