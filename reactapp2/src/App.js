@@ -4,11 +4,17 @@ import Navi from "./Navi";
 import ProductList from "./ProductList";
 import { Container, Row, Col } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./NotFound";
 import CartList from "./CartList";
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.notify = this.notify.bind(this);
+  }
+
   state = { currentCategory: "", products: [], cart: [] };
   changeCategory = (category) => {
     this.setState({ currentCategory: category.categoryName });
@@ -46,6 +52,10 @@ export default class App extends Component {
 
     this.setState({ cart: newCart });
   };
+  notify() {
+    return toast.success("Wow so easy!");
+  }
+
   addToCart = (product) => {
     let newCart = this.state.cart;
     var addedItem = newCart.find((c) => c.product.id === product.id);
@@ -56,6 +66,7 @@ export default class App extends Component {
       this.setState({ cart: newCart });
     }
     this.setState({ cart: newCart });
+    this.notify();
   };
 
   render() {
@@ -73,26 +84,27 @@ export default class App extends Component {
                 info={CetegoryInfo}
               />
             </Col>
+           
             <Col xs="9">
               <Routes>
                 <Route
                   exact
-                  path="/app"
-                  render={props => (
+                  path="/"
+                  element={
                     <ProductList
-                      {...props}
                       addToCart={this.addToCart}
                       info={productInfo}
                       products={this.state.products}
                     />
-                  )}
-                />
+                  }
+                />        <ToastContainer/>
                 <Route exact path="/cart" Component={CartList} />
                 <Route Component={NotFound} />
               </Routes>
             </Col>
           </Row>
         </Container>
+
       </div>
     );
   }
