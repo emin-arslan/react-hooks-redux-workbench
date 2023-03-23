@@ -35,9 +35,15 @@ export default class CartSummary extends Component {
             </DropdownItem>
             
           ))}
+          <hr/>
           <DropdownItem>
               <Link to="cart">Go to cart</Link>
+             
               </DropdownItem>
+              <hr/>
+              <DropdownItem>
+              <Link to="Form1">Go to Form</Link>
+               </DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
     );
