@@ -44,13 +44,16 @@ export default class App extends Component {
           ? { ...obj, quantity: obj.quantity - 1 }
           : obj
       );
+      toast.info(cartItem.product.body+ " azaltıldı.")
     } else {
       newCart = this.state.cart.filter(
         (c) => c.product.id !== cartItem.product.id
       );
+      toast.error(cartItem.product.body+ " kaldırıldı.")
     }
 
     this.setState({ cart: newCart });
+    
   };
   notify() {
     return toast.success("Wow so easy!");
@@ -98,7 +101,12 @@ export default class App extends Component {
                     />
                   }
                 />
-                <Route exact path="/cart" Component={CartList} />
+                <Route exact path="/cart" element={
+                    <CartList
+                      cart={this.state.cart}
+                      removeFromCart={this.removeFromCart}
+                    />
+                  } />
                 <Route Component={NotFound} />
               </Routes>
             </Col>
