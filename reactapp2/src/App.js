@@ -9,6 +9,7 @@ import { Route, Routes } from "react-router-dom";
 import NotFound from "./NotFound";
 import CartList from "./CartList";
 import FormDemo1 from "./FormDemo1";
+import FormDemo2 from "./FormDemo2";
 
 export default class App extends Component {
   constructor(props) {
@@ -109,6 +110,7 @@ export default class App extends Component {
                     />
                   } />
                 <Route path="form1" Component={FormDemo1} />
+                <Route path="form2" Component={FormDemo2} />
                 <Route Component={NotFound} />
               </Routes>
             </Col>
