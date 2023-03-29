@@ -4,7 +4,7 @@ This project uses react & json
 
 # What does it do 
 
-Add list and category , u can select item from list \
+Add list and category , u can select item from list group by category\
 ![image](https://user-images.githubusercontent.com/126695865/228505408-9cfa3c92-5e86-458d-add6-677a66213d3b.png)
 
 Also you can add to cart items. If you want you can remove items from cart.
