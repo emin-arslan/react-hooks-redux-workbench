@@ -8,18 +8,19 @@ import {
   UncontrolledDropdown,
 } from "reactstrap";
 export default class CartSummary extends Component {
+
   renderEmptyCart() {
     return <div>Empty Cart</div>;
   }
   renderSummary() {
     return (
-      <UncontrolledDropdown nav inNavbar>
-        <DropdownToggle nav caret>
+      <UncontrolledDropdown style ={{listStyle:'none'}} nav inNavbar>
+        <DropdownToggle  nav caret>
           Your Cart
         </DropdownToggle>
         <DropdownMenu>
           {this.props.cart.map((cartItem) => (
-            <DropdownItem key={cartItem.product.id}>
+            <DropdownItem  key={cartItem.product.id}>
               {cartItem.product.quantity}
               <Badge
                 onClick={(e) => {
